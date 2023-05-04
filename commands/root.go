@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 Manoj Sharma manoj.sharma@synectiks.com
-*/
 package commands
 
 import (
@@ -13,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// AwsxCloudElementsCmd represents the base command when called without any subcommands
+// AwsxKinesisCmd represents the base command when called without any subcommands
 var AwsxKinesisCmd = &cobra.Command{
 	Use:   "Kinesis",
 	Short: "get Kinesis Details command gets resource counts",

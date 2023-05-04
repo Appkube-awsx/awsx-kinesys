@@ -53,7 +53,7 @@ func assumeRole(roleArn string, sessionName string, externalId string, accesskey
 	}
 	//fmt.Println("Assume role output: ", result)
 
-	awsSession, err := awssession.GetSessionByCreds("us-east-1", *result.Credentials.AccessKeyId, *result.Credentials.SecretAccessKey, *result.Credentials.SessionToken)
+	awsSession, err := awssession.GetSessionByCreds(region, *result.Credentials.AccessKeyId, *result.Credentials.SecretAccessKey, *result.Credentials.SessionToken)
 
 	if err != nil {
 		fmt.Printf("failed to assume role, %v\n", err)
@@ -94,7 +94,7 @@ func assumeRoleForCost(roleArn string, sessionName string, externalId string, ac
 	}
 	//fmt.Println("Assume role output: ", result)
 
-	awsSession, err := awssession.GetSessionByCreds("us-east-1", *result.Credentials.AccessKeyId, *result.Credentials.SecretAccessKey, *result.Credentials.SessionToken)
+	awsSession, err := awssession.GetSessionByCreds(region, *result.Credentials.AccessKeyId, *result.Credentials.SecretAccessKey, *result.Credentials.SessionToken)
 
 	if err != nil {
 		fmt.Printf("failed to assume role, %v\n", err)
