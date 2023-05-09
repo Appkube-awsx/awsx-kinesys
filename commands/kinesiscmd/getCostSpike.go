@@ -239,7 +239,7 @@ func ServiceCostDetails(region string, crossAccountRoleArn string, accessKey str
 			Dimensions: &costexplorer.DimensionValues{
 				Key: aws.String("SERVICE"),
 				Values: []*string{
-					aws.String("Amazon Elastic Container Service for Kubernetes"),
+					aws.String("Amazon Kinesis Service"),
 				},
 			},
 		},
