@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package kinesiscmd
 
 import (
@@ -13,13 +10,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// getConfigDataCmd represents the getConfigData command
-var GetCostDataCmd = &cobra.Command{
-	Use:   "getCostData",
-	Short: "A brief description of your command",
-	Long:  ``,
+// getKinesisCostDataCmd represents the getConfigData command
+var GetKinesisCostDataCmd = &cobra.Command{
+	Use:   "getKinesisCostData",
+	Short: "A brief description of getKinesisCost command",
+	Long:  `getKinesisCostData`,
 	Run: func(cmd *cobra.Command, args []string) {
-
+                 log.Println("Command getKinesis CostData started")
 		vaultUrl := cmd.Parent().PersistentFlags().Lookup("vaultUrl").Value.String()
 		accountNo := cmd.Parent().PersistentFlags().Lookup("accountId").Value.String()
 		region := cmd.Parent().PersistentFlags().Lookup("zone").Value.String()
@@ -42,8 +39,8 @@ func getKinesisCostDetail(region string, crossAccountRoleArn string, accessKey s
 
 	input := &costexplorer.GetCostAndUsageInput{
 		TimePeriod: &costexplorer.DateInterval{
-			Start: aws.String("2023-02-01"),
-			End:   aws.String("2023-03-01"),
+			Start: aws.String("2022-06-01"),
+			End:   aws.String("2022-07-01"),
 		},
 		Metrics: []*string{
 			aws.String("UNBLENDED_COST"),
@@ -61,7 +58,7 @@ func getKinesisCostDetail(region string, crossAccountRoleArn string, accessKey s
 				Key:  aws.String("REGION"),
 			},
 		},
-		Granularity: aws.String("DAILY"),
+		Granularity: aws.String("MONTHLY"),
 		Filter: &costexplorer.Expression{
 			And: []*costexplorer.Expression{
 				{
