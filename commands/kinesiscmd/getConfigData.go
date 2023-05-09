@@ -15,12 +15,12 @@ import (
 )
 
 // getConfigDataCmd represents the getConfigData command
-var GetConfigDataCmd = &cobra.Command{
-	Use:   "getConfigData",
-	Short: "A brief description of your command",
-	Long:  ``,
+var GetKinesisConfigDataCmd = &cobra.Command{
+	Use:   "GetKinesisConfig command",
+	Short: "A brief description of GetKinesisConfig command",
+	Long:  `GetKinesisConfig command details for AWS Account`,
 	Run: func(cmd *cobra.Command, args []string) {
-
+                log.Println("Command getKinesisConfig started")
 		vaultUrl := cmd.Parent().PersistentFlags().Lookup("vaultUrl").Value.String()
 		accountNo := cmd.Parent().PersistentFlags().Lookup("accountId").Value.String()
 		region := cmd.Parent().PersistentFlags().Lookup("zone").Value.String()
@@ -73,9 +73,9 @@ func getKinesisDetail(region string, crossAccountRoleArn string, accessKey strin
 }
 
 func init() {
-	GetConfigDataCmd.Flags().StringP("streamName", "s", "", "kinesis  stream name")
+	GetKinesisConfigDataCmd.Flags().StringP("streamName", "s", "", "kinesis  stream name")
 
-	if err := GetConfigDataCmd.MarkFlagRequired("streamName"); err != nil {
+	if err := GetKinesisConfigDataCmd.MarkFlagRequired("streamName"); err != nil {
 		fmt.Println("--streamName is required", err)
 	}
 }
