@@ -46,10 +46,6 @@ func getKinesisList(region string, crossAccountRoleArn string, accessKey string,
 	return streamList, err
 }
 
-//func GetConfig(region string, crossAccountRoleArn string, accessKey string, secretKey string) *configservice.GetDiscoveredResourceCountsOutput {
-//	return getLambdaList(region, crossAccountRoleArn, accessKey, secretKey)
-//}
-
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
