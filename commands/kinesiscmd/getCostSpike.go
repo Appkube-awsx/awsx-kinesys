@@ -14,7 +14,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var GetCostSpikeCmd = &cobra.Command{
+var GetKinesisCostSpikeCmd = &cobra.Command{
 	Use:   "GetCostSpike",
 	Short: "Get cost Spike",
 	Long:  `Retrieve cost spike data from AWS Cost Explorer`,
@@ -364,19 +364,19 @@ func convertCostDataToFloat(CostData string) float64 {
 }
 
 func init() {
-	GetCostSpikeCmd.Flags().StringP("granularity", "t", "", "granularity name")
+	GetKinesisCostSpikeCmd.Flags().StringP("granularity", "t", "", "granularity name")
 
-	if err := GetCostSpikeCmd.MarkFlagRequired("granularity"); err != nil {
+	if err := GetKinesisCostSpikeCmd.MarkFlagRequired("granularity"); err != nil {
 		fmt.Println(err)
 	}
-	GetCostSpikeCmd.Flags().StringP("startDate", "u", "", "startDate name")
+	GetKinesisCostSpikeCmd.Flags().StringP("startDate", "u", "", "startDate name")
 
-	if err := GetCostSpikeCmd.MarkFlagRequired("startDate"); err != nil {
+	if err := GetKinesisCostSpikeCmd.MarkFlagRequired("startDate"); err != nil {
 		fmt.Println(err)
 	}
-	GetCostSpikeCmd.Flags().StringP("endDate", "v", "", "endDate name")
+	GetKinesisCostSpikeCmd.Flags().StringP("endDate", "v", "", "endDate name")
 
-	if err := GetCostSpikeCmd.MarkFlagRequired("endDate"); err != nil {
+	if err := GetKinesisCostSpikeCmd.MarkFlagRequired("endDate"); err != nil {
 		fmt.Println(err)
 	}
 
