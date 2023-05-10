@@ -16,7 +16,7 @@ var GetKinesisCostDataCmd = &cobra.Command{
 	Short: "A brief description of getKinesisCost command",
 	Long:  `getKinesisCostData`,
 	Run: func(cmd *cobra.Command, args []string) {
-                 log.Println("Command getKinesis CostData started")
+                log.Println("Command getKinesis CostData started")
 		vaultUrl := cmd.Parent().PersistentFlags().Lookup("vaultUrl").Value.String()
 		accountNo := cmd.Parent().PersistentFlags().Lookup("accountId").Value.String()
 		region := cmd.Parent().PersistentFlags().Lookup("zone").Value.String()
@@ -81,7 +81,7 @@ func getKinesisCostDetail(region string, crossAccountRoleArn string, accessKey s
 			},
 		},
 	}
-
+        //getting the cost data 
 	costData, err := costClient.GetCostAndUsage(input)
 	if err != nil {
 		log.Fatalln("Error: in getting cost data", err)
