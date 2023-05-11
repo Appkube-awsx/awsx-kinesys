@@ -1,4 +1,4 @@
-- [What is awsx-eks](#awsx-kinesis)
+- [What is awsx-kinesis](#awsx-kinesis)
 - [How to write plugin subcommand](#how-to-write-plugin-subcommand)
 - [How to build / Test](#how-to-build--test)
 - [what it does ](#what-it-does)
