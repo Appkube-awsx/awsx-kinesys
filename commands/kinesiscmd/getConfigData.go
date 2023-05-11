@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package kinesiscmd
 
 import (
@@ -15,10 +12,11 @@ import (
 )
 
 // getConfigDataCmd represents the getConfigData command
-var GetKinesisConfigDataCmd = &cobra.Command{
-	Use:   "GetKinesisConfig command",
-	Short: "A brief description of GetKinesisConfig command",
-	Long:  `GetKinesisConfig command details for AWS Account`,
+var GetConfigDataCmd = &cobra.Command{
+	Use:   "getConfigData",
+	Short: "A brief description of your command",
+	Long:  ``,
+
 	Run: func(cmd *cobra.Command, args []string) {
                 log.Println("Command getKinesisConfig started")
 		vaultUrl := cmd.Parent().PersistentFlags().Lookup("vaultUrl").Value.String()
@@ -33,16 +31,16 @@ var GetKinesisConfigDataCmd = &cobra.Command{
 
 		if authFlag {
 			streamName, _ := cmd.Flags().GetString("streamName")
-			scalingType, _ := cmd.Flags().GetString("scalingType")
-			targetShardCount, _ := cmd.Flags().GetInt64("targetShardCount")
+			streamArn, _ := cmd.Flags().GetString("streamArn")
+			
 			if streamName != "" {
-				getKinesisDetail(region, crossAccountRoleArn, acKey, secKey, streamName, scalingType, targetShardCount, externalId)
+				getKinesisDetail(region, crossAccountRoleArn, acKey, secKey, streamName, streamArn,  externalId)
 
 			} else {
 				log.Fatalln("stream not provided.Program exit")
 			}
-			if scalingType != "" {
-				getKinesisDetail(region, crossAccountRoleArn, acKey, secKey, streamName, scalingType, targetShardCount, externalId)
+			if streamArn != "" {
+				getKinesisDetail(region, crossAccountRoleArn, acKey, secKey, streamName, streamArn, externalId)
 
 			} else {
 				log.Fatalln("stream not provided.Program exit")
@@ -52,17 +50,16 @@ var GetKinesisConfigDataCmd = &cobra.Command{
 	},
 }
 
-func getKinesisDetail(region string, crossAccountRoleArn string, accessKey string, secretKey string, streamName string, scalingType string, targetShardCount int64, externalId string) (*kinesis.UpdateShardCountOutput, error) {
+func getKinesisDetail(region string, crossAccountRoleArn string, accessKey string, secretKey string, streamName string, streamArn string, externalId string) (*kinesis.DescribeStreamOutput, error) {
 	log.Println("Getting Kinesis  data")
 	kinesisClient := client.GetClient(region, crossAccountRoleArn, accessKey, secretKey, externalId)
 
-	input := &kinesis.UpdateShardCountInput{
+	input := &kinesis.DescribeStreamInput{
 		StreamName:       aws.String(streamName),
-		ScalingType:      aws.String(scalingType),
-		TargetShardCount: aws.Int64(targetShardCount),
+		StreamARN: aws.String(streamArn),
 	}
 
-	kinesisData, err := kinesisClient.UpdateShardCount(input)
+	kinesisData, err := kinesisClient.DescribeStream(input)
 
 	if err != nil {
 		log.Fatalln("Error: in getting kinesis data", err)
@@ -73,9 +70,14 @@ func getKinesisDetail(region string, crossAccountRoleArn string, accessKey strin
 }
 
 func init() {
-	GetKinesisConfigDataCmd.Flags().StringP("streamName", "s", "", "kinesis  stream name")
+	GetConfigDataCmd.Flags().StringP("streamName", "s", "", "kinesis  stream name")
 
-	if err := GetKinesisConfigDataCmd.MarkFlagRequired("streamName"); err != nil {
+	if err := GetConfigDataCmd.MarkFlagRequired("streamName"); err != nil {
 		fmt.Println("--streamName is required", err)
+	}
+	GetConfigDataCmd.Flags().StringP("streamArn", "t", "", "kinesis  stream arn")
+
+	if err := GetConfigDataCmd.MarkFlagRequired("streamArn"); err != nil {
+		fmt.Println("--streamArn is required", err)
 	}
 }
