@@ -57,9 +57,8 @@ func Execute() {
 }
 
 func init() {
-	// AwsxKinesisCmd.AddCommand(kinesiscmd.GetConfigDataCmd)
+	
 	AwsxKinesisCmd.AddCommand(kinesiscmd.GetConfigDataCmd)
-
 	AwsxKinesisCmd.PersistentFlags().String("vaultUrl", "", "vault end point")
 	AwsxKinesisCmd.PersistentFlags().String("accountId", "", "aws account number")
 	AwsxKinesisCmd.PersistentFlags().String("zone", "", "aws region")
