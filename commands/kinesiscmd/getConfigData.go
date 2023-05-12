@@ -14,7 +14,7 @@ import (
 // getConfigDataCmd represents the getConfigData command
 var GetConfigDataCmd = &cobra.Command{
 	Use:   "getConfigData",
-	Short: "A brief description of your command",
+	Short: "A brief description of getConfigData command",
 	Long:  ``,
 
 	Run: func(cmd *cobra.Command, args []string) {
