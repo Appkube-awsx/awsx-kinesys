@@ -14,11 +14,11 @@ import (
 // getConfigDataCmd represents the getConfigData command
 var GetConfigDataCmd = &cobra.Command{
 	Use:   "getConfigData",
-	Short: "A brief description of your command",
+	Short: "A brief description of getConfigData command",
 	Long:  ``,
 
 	Run: func(cmd *cobra.Command, args []string) {
-                log.Println("Command getKinesisConfig started")
+                log.Println("Command getKinesisConfigData started")
 		vaultUrl := cmd.Parent().PersistentFlags().Lookup("vaultUrl").Value.String()
 		accountNo := cmd.Parent().PersistentFlags().Lookup("accountId").Value.String()
 		region := cmd.Parent().PersistentFlags().Lookup("zone").Value.String()
