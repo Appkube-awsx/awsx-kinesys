@@ -80,7 +80,7 @@ func getKinesisRefactor(region string, crossAccountRoleArn string, accessKey str
 		if err != nil {
 			fmt.Println("Error getting shard iterator:", err)
 			log.Println(getShardIteratorOutput)
-			return getShardIteratorOutput, err
+			
 
 		}
 
