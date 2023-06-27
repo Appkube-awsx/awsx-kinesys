@@ -51,7 +51,7 @@ var GetRefactorDataCmd = &cobra.Command{
 func getKinesisRefactor(region string, crossAccountRoleArn string, accessKey string, secretKey string, streamName string, streamArn string, externalId string) (*kinesis.DescribeStreamOutput, error) {
 	kinesisClient := client.GetClient(region, crossAccountRoleArn, accessKey, secretKey, externalId)
 
-	//kinesisClient := kinesis.New(awsSession)
+	//kinesisClient := kinesis.New(sess)
 
 	//Refactor code
 
@@ -80,6 +80,7 @@ func getKinesisRefactor(region string, crossAccountRoleArn string, accessKey str
 		if err != nil {
 			fmt.Println("Error getting shard iterator:", err)
 			log.Println(getShardIteratorOutput)
+			return getShardIteratorOutput, err
 
 		}
 
