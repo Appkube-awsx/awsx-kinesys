@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// getRefactoringDataCmd represents the getConfigData command
+// getRefactoringDataCmd represents the getRefactorData command
 var GetRefactorDataCmd = &cobra.Command{
 	Use:   "getRefactorData",
 	Short: "A brief description of your command",
@@ -51,7 +51,7 @@ var GetRefactorDataCmd = &cobra.Command{
 func getKinesisRefactor(region string, crossAccountRoleArn string, accessKey string, secretKey string, streamName string, streamArn string, externalId string) (*kinesis.DescribeStreamOutput, error) {
 	kinesisClient := client.GetClient(region, crossAccountRoleArn, accessKey, secretKey, externalId)
 
-	//kinesisClient := kinesis.New(sess)
+	
 
 	//Refactor code
 
