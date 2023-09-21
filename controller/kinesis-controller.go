@@ -3,7 +3,7 @@ package controller
 import (
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/client"
-	"github.com/Appkube-awsx/awsx-kinesis/command"
+	"github.com/Appkube-awsx/awsx-kinesys/command"
 	"github.com/aws/aws-sdk-go/service/kinesis"
 	"log"
 )
