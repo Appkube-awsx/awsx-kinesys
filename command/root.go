@@ -5,7 +5,7 @@ import (
 	"github.com/Appkube-awsx/awsx-common/client"
 	"log"
 
-	"github.com/Appkube-awsx/awsx-kinesis/command/kinesiscmd"
+	"github.com/Appkube-awsx/awsx-kinesys/command/kinesiscmd"
 	"github.com/aws/aws-sdk-go/service/kinesis"
 	"github.com/spf13/cobra"
 )

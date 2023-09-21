@@ -1,4 +1,4 @@
-module github.com/Appkube-awsx/awsx-kinesis
+module github.com/Appkube-awsx/awsx-kinesys
 
 go 1.19
 
