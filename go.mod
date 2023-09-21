@@ -3,6 +3,7 @@ module github.com/Appkube-awsx/awsx-kinesis
 go 1.19
 
 require (
+	github.com/Appkube-awsx/awsx-common v1.1.9
 	github.com/aws/aws-sdk-go v1.44.180
 	github.com/spf13/cobra v1.6.1
 )

@@ -1,7 +1,7 @@
 package main
 
-import "github.com/Appkube-awsx/awsx-kinesis/commands"
+import "github.com/Appkube-awsx/awsx-kinesis/command"
 
 func main() {
-	commands.Execute()
+	command.Execute()
 }
