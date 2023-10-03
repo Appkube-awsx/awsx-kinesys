@@ -43,3 +43,12 @@ func GetKinesisStreams(clientAuth *client.Auth) (*kinesis.ListStreamsOutput, err
 	}
 	return response, nil
 }
+
+func GetKinesisDetailsWithTag(clientAuth *client.Auth) (string, error) {
+	response, err := command.GetKinesisDetailsWithTags(*clientAuth)
+	if err != nil {
+		log.Println(err.Error())
+		return "", err
+	}
+	return response, nil
+}

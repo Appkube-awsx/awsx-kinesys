@@ -48,9 +48,12 @@ func GetKinesisDetail(streamName string, streamArn string, auth client.Auth) (*k
 
 	input := &kinesis.DescribeStreamInput{
 		StreamName: aws.String(streamName),
-		StreamARN:  aws.String(streamArn),
+		//StreamARN:  aws.String(streamArn),
 	}
 
+	if streamArn != "" {
+		input.SetStreamARN(streamArn)
+	}
 	kinesisData, err := client.DescribeStream(input)
 
 	if err != nil {

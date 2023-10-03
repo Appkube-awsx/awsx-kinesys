@@ -1,6 +1,7 @@
 package command
 
 import (
+	"encoding/json"
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/client"
 	"log"
@@ -9,6 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go/service/kinesis"
 	"github.com/spf13/cobra"
 )
+
+type KinesysObj struct {
+	Stream interface{} `json:"stream"`
+	Tags   interface{} `json:"tags"`
+}
 
 // AwsxKinesisCmd represents the base command when called without any subcommands
 var AwsxKinesisCmd = &cobra.Command{
@@ -38,10 +44,47 @@ func GetKinesisList(auth client.Auth) (*kinesis.ListStreamsOutput, error) {
 	input := &kinesis.ListStreamsInput{}
 	streamList, err := client.ListStreams(input)
 	if err != nil {
-		log.Fatalln("Error: in getting kinesis streams", err)
+		log.Println("Error: in getting kinesis streams", err)
+		return nil, err
 	}
 	log.Println(streamList)
 	return streamList, err
+}
+
+func GetKinesisDetailsWithTags(auth client.Auth) (string, error) {
+	log.Println("Getting kinesis details with tags")
+	streamList, err := GetKinesisList(auth)
+	if err != nil {
+		log.Println("Error: in getting kinesis streams", err)
+		return "", err
+	}
+	client := client.GetClient(auth, client.KINESIS_CLIENT).(*kinesis.Kinesis)
+	allKinesysDetailWithTag := []KinesysObj{}
+	for _, name := range streamList.StreamNames {
+		kinesysDetail, err := kinesiscmd.GetKinesisDetail(*name, "", auth)
+		if err != nil {
+			log.Println("Error: in getting kinesys detail", err)
+			continue
+		}
+
+		tagInput := &kinesis.ListTagsForStreamInput{
+			StreamName: name,
+		}
+		tagOutput, err := client.ListTagsForStream(tagInput)
+		if err != nil {
+			log.Println("Error: in getting kinesys tag", err)
+			continue
+		}
+		kinesysObj := KinesysObj{
+			Stream: kinesysDetail,
+			Tags:   tagOutput,
+		}
+		allKinesysDetailWithTag = append(allKinesysDetailWithTag, kinesysObj)
+	}
+	jsonData, err := json.Marshal(allKinesysDetailWithTag)
+	log.Println(string(jsonData))
+	return string(jsonData), err
+
 }
 
 // Execute adds all child command to the root command and sets flags appropriately.
